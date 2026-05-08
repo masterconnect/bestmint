@@ -1,6 +1,37 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { CATEGORIES } from "@/lib/tools/categories";
 import { TOOLS, toolsByCategory } from "@/lib/tools/registry";
+import { SITE } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: SITE.url },
+  openGraph: {
+    type: "website",
+    url: SITE.url,
+    title: `${SITE.name} — ${SITE.tagline}`,
+    description: SITE.description,
+    siteName: SITE.name,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE.name} — ${SITE.tagline}`,
+    description: SITE.description,
+    site: SITE.twitter,
+  },
+};
+
+const homeJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: `${SITE.name} — Tool index`,
+  itemListElement: TOOLS.map((t, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: t.name,
+    url: `${SITE.url}/tools/${t.category}/${t.slug}`,
+  })),
+};
 
 export default function Home() {
   const total = TOOLS.length;
@@ -77,6 +108,11 @@ export default function Home() {
           })}
         </div>
       </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
+      />
 
       {/* Popular tools strip */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20">

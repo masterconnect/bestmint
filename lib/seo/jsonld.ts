@@ -74,6 +74,15 @@ export function categoryCollectionJsonLd(category: Category, toolUrls: { name: s
     name: category.name,
     description: category.seo.description,
     url: `${SITE.url}/tools/${category.slug}`,
-    hasPart: toolUrls.map((t) => ({ "@type": "WebPage", name: t.name, url: t.url })),
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: toolUrls.length,
+      itemListElement: toolUrls.map((t, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: t.name,
+        url: t.url,
+      })),
+    },
   };
 }
