@@ -58,7 +58,7 @@ export default function Image() {
               color: "white",
             }}
           >
-            <div style={{ display: "flex" }}>The all-in-one toolbox</div>
+            <div style={{ display: "flex" }}>Free online tools</div>
             <div
               style={{
                 display: "flex",
@@ -67,7 +67,7 @@ export default function Image() {
                 color: "transparent",
               }}
             >
-              for the modern web.
+              for developers, designers and creators.
             </div>
           </div>
           <div style={{ display: "flex", fontSize: 30, color: "#9a9aa3", maxWidth: 980 }}>
