@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { CATEGORIES } from "@/lib/tools/categories";
+import { TOOLS } from "@/lib/tools/registry";
 import { SITE } from "@/lib/site";
 
 export function SiteFooter() {
+  // Split categories into three columns of three so the footer stays balanced.
+  const cols: typeof CATEGORIES[] = [
+    CATEGORIES.slice(0, 3),
+    CATEGORIES.slice(3, 6),
+    CATEGORIES.slice(6, 9),
+  ];
   return (
     <footer className="mt-24 border-t border-[var(--color-border)] bg-[var(--color-surface)]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -15,9 +22,28 @@ export function SiteFooter() {
             <p className="mt-3 text-sm text-[var(--color-muted)] max-w-xs">
               {SITE.description}
             </p>
+            <p className="mt-3 text-xs text-[var(--color-muted)]">
+              {TOOLS.length} free tools across {CATEGORIES.length} categories. No signup, no tracking.
+            </p>
           </div>
-          {CATEGORIES.slice(0, 3).map((c) => (
-            <FooterCol key={c.slug} title={c.name} href={`/tools/${c.slug}`} />
+          {cols.map((col, idx) => (
+            <div key={idx}>
+              <h2 className="text-xs uppercase tracking-wider text-[var(--color-muted)] font-medium mb-3">
+                {idx === 0 ? "Build" : idx === 1 ? "Generate" : "Optimize"}
+              </h2>
+              <ul className="space-y-2">
+                {col.map((c) => (
+                  <li key={c.slug}>
+                    <Link
+                      href={`/tools/${c.slug}`}
+                      className="text-sm text-[var(--color-muted)] hover:text-[var(--color-accent)] transition"
+                    >
+                      {c.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
         <div className="mt-10 pt-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between text-xs text-[var(--color-muted)]">
@@ -29,13 +55,5 @@ export function SiteFooter() {
         </div>
       </div>
     </footer>
-  );
-}
-
-function FooterCol({ title, href }: { title: string; href: string }) {
-  return (
-    <div>
-      <Link href={href} className="font-medium text-sm hover:text-[var(--color-accent)]">{title}</Link>
-    </div>
   );
 }

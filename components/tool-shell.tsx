@@ -54,6 +54,31 @@ export function ToolShell({ tool, children }: ToolShellProps) {
 
       <section className="mt-8">{children}</section>
 
+      {tool.useCases.length > 0 && (
+        <section className="mt-12 border-t border-[var(--color-border)] pt-10" aria-labelledby="use-cases-heading">
+          <h2 id="use-cases-heading" className="text-xl font-semibold tracking-tight">
+            Common use cases
+          </h2>
+          <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {tool.useCases.map((uc, i) => (
+              <li
+                key={i}
+                className="flex items-start gap-3 rounded-lg border border-[var(--color-border)] bg-[var(--color-surface)] p-4 text-sm"
+              >
+                <span
+                  className="flex-none mt-0.5 h-5 w-5 rounded-full text-xs font-medium flex items-center justify-center"
+                  style={{ background: `color-mix(in srgb, ${category.accent} 22%, transparent)`, color: category.accent }}
+                  aria-hidden="true"
+                >
+                  {i + 1}
+                </span>
+                <span className="text-[var(--color-muted)] leading-relaxed">{uc}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <FAQs items={tool.faqs} />
 
       <section className="mt-12 border-t border-[var(--color-border)] pt-10">
