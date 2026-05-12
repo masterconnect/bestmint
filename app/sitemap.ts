@@ -23,5 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
-  return [root, ...cats, ...tools];
+  const legal = ["privacy", "cookies", "terms"].map((slug) => ({
+    url: `${SITE.url}/${slug}`,
+    lastModified,
+    changeFrequency: "yearly" as const,
+    priority: 0.3,
+  }));
+  return [root, ...cats, ...tools, ...legal];
 }

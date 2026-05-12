@@ -23,7 +23,7 @@ export function SiteFooter() {
               {SITE.description}
             </p>
             <p className="mt-3 text-xs text-[var(--color-muted)]">
-              {TOOLS.length} free tools across {CATEGORIES.length} categories. No signup, no tracking.
+              {TOOLS.length} free tools across {CATEGORIES.length} categories. No signup required.
             </p>
           </div>
           {cols.map((col, idx) => (
@@ -46,9 +46,12 @@ export function SiteFooter() {
             </div>
           ))}
         </div>
-        <div className="mt-10 pt-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between text-xs text-[var(--color-muted)]">
-          <p>© {new Date().getFullYear()} {SITE.name}. All tools run in your browser.</p>
-          <div className="flex gap-4">
+        <div className="mt-10 pt-6 border-t border-[var(--color-border)] flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between text-xs text-[var(--color-muted)]">
+          <p>© {new Date().getFullYear()} {SITE.name}. Most tools run entirely in your browser.</p>
+          <div className="flex flex-wrap gap-x-4 gap-y-1">
+            <Link href="/privacy" className="hover:text-[var(--color-foreground)]">Privacy</Link>
+            <Link href="/cookies" className="hover:text-[var(--color-foreground)]">Cookies</Link>
+            <Link href="/terms" className="hover:text-[var(--color-foreground)]">Terms</Link>
             <Link href="/sitemap.xml" className="hover:text-[var(--color-foreground)]">Sitemap</Link>
             <Link href="/robots.txt" className="hover:text-[var(--color-foreground)]">Robots</Link>
           </div>
