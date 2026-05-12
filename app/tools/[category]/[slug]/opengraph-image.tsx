@@ -1,14 +1,10 @@
 import { ImageResponse } from "next/og";
-import { TOOLS, TOOL_BY_SLUG } from "@/lib/tools/registry";
+import { TOOL_BY_SLUG } from "@/lib/tools/registry";
 import { CATEGORY_BY_SLUG } from "@/lib/tools/categories";
 import { SITE } from "@/lib/site";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-
-export function generateStaticParams() {
-  return TOOLS.map((t) => ({ category: t.category, slug: t.slug }));
-}
 
 /** Glyphs the OG renderer's default font can't resolve — substituted only here, not on-page. */
 const OG_ICON_FALLBACK: Record<string, string> = {
